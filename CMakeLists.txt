@@ -10,7 +10,7 @@ find_package(GLEW REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 include_directories(${GLEW_INCLIDE_DIRS})
 
-add_executable(glconi main.cpp Shaders.cpp Shaders.h GLConi.cpp GLConi.h VertexBufferObject.cpp VertexBufferObject.h ShaderProgram.cpp ShaderProgram.h)
+add_executable(glconi main.cpp Shaders.cpp Shaders.h GLConi.cpp GLConi.h VertexBufferObject.cpp VertexBufferObject.h ShaderProgram.cpp ShaderProgram.h Cube.cpp Cube.h)
 
 target_link_libraries(glconi ${GLEW_LIBRARIES})
 target_link_libraries(glconi ${OPENGL_gl_LIBRARY} glfw)

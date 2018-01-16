@@ -10,23 +10,23 @@
 #include <GLFW/glfw3.h>
 #include "VertexBufferObject.h"
 #include "ShaderProgram.h"
+#include "Cube.h"
 
 class GLConi {
 private:
-    int windowWidth;
-    int windowHeight;
-    GLFWwindow *window;
     glm::vec3 bgColor;
-    ShaderProgram *triangleShader;
-    VertexBufferObject *triangleVbo;
+    Cube *cube;
 
     void checkGLError(const char *prefix);
 public:
-    GLConi() : windowWidth(1024), windowHeight(768), bgColor(0.0f, 0.0f, 0.4f) {
-        this->initGL();
-    }
+    GLFWwindow *window;
+    int windowWidth;
+    int windowHeight;
 
-    void initGL();
+    GLConi();
+
+    ~GLConi();
+
     bool drawFrame();
 };
 

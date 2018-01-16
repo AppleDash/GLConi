@@ -12,8 +12,9 @@
 class VertexBufferObject {
 private:
     GLuint vboId;
+    GLuint index;
 public:
-    VertexBufferObject();
+    VertexBufferObject(GLuint index);
     ~VertexBufferObject();
     void bind();
     void unbind();

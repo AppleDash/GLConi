@@ -26,6 +26,10 @@ ShaderProgram::ShaderProgram(const char *name) {
     if (this->programId == 0) {
         throw std::runtime_error("failed to compile shader program");
     }
+
+    for (int i = 0; i < 10; i++) {
+        this->vbos[i] = NULL;
+    }
 }
 
 
@@ -38,14 +42,42 @@ ShaderProgram::ShaderProgram(const char *vertexPath, const char *fragmentPath) {
 
 void ShaderProgram::use() {
     glUseProgram(this->programId);
+
+    for (int i = 0; i < 10; i++) {
+        if (this->vbos[i] != nullptr) {
+            this->vbos[i]->bind();
+        }
+    }
 }
+
+void ShaderProgram::unuse() {
+    glUseProgram(0);
+
+    for (int i = 0; i < 10; i++) {
+        if (this->vbos[i] != nullptr) {
+            this->vbos[i]->unbind();
+        }
+    }
+}
+
 
 ShaderProgram::~ShaderProgram() {
     if (this->programId != 0) {
         glDeleteShader(this->programId);
     }
+
+    for (int i = 0; i < 10; i++) {
+        if (this->vbos[i] != nullptr) {
+            delete this->vbos[i];
+        }
+    }
 }
 
 GLint ShaderProgram::getUniformLocation(const char *name) {
     return glGetUniformLocation(this->programId, name);
+}
+
+void ShaderProgram::uniformMatrix4fv(const char *location, GLsizei count, GLfloat *ptr) {
+    this->use();
+    glUniformMatrix4fv(this->getUniformLocation(location), count, GL_FALSE, ptr);
 }
